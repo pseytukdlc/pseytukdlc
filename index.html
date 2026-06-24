@@ -377,7 +377,7 @@ function setMode(mode){currentMode=mode;var t=document.getElementById('periodTog
 
 function toggleFaq(q){var item=q.parentElement,wasOpen=item.classList.contains('open'),all=document.querySelectorAll('.faq-item');for(var i=0;i<all.length;i++)all[i].classList.remove('open');if(!wasOpen)item.classList.add('open')}
 
-function buyKey(plan){sfxConfetti();fireConfetti();window.open('https://funpay.com','_blank')}
+function buyKey(plan){sfxConfetti();fireConfetti();var urls={'7d':'https://funpay.com/lots/71531558/','30d':'https://funpay.com/lots/71537010/','90d':'https://funpay.com/lots/71537123/','perm':'https://funpay.com/lots/71537401/'};window.open(urls[plan]||'https://funpay.com','_blank')}
 
 var confettiCanvas=document.getElementById('confettiCanvas'),confCtx=confettiCanvas.getContext('2d'),confettiPieces=[];
 function resizeConfetti(){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight}
