@@ -9,8 +9,8 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0f;
-            color: #e0e0e8;
+            background: #111111;
+            color: #d0d4d0;
             overflow-x: hidden;
         }
 
@@ -19,14 +19,14 @@
             width: 600px;
             height: 600px;
             border-radius: 50%;
-            filter: blur(150px);
-            opacity: 0.15;
+            filter: blur(160px);
+            opacity: 0.12;
             pointer-events: none;
             z-index: 0;
         }
-        .bg-glow.g1 { top: -200px; left: -100px; background: #6c5ce7; }
-        .bg-glow.g2 { top: 40%; right: -200px; background: #00cec9; }
-        .bg-glow.g3 { bottom: -200px; left: 30%; background: #fd79a8; }
+        .bg-glow.g1 { top: -200px; left: -100px; background: #1F6F50; }
+        .bg-glow.g2 { top: 40%; right: -200px; background: #2ecc71; }
+        .bg-glow.g3 { bottom: -200px; left: 30%; background: #1a5c42; }
 
         .container {
             max-width: 1100px;
@@ -45,21 +45,21 @@
         .logo {
             font-size: 22px;
             font-weight: 800;
-            background: linear-gradient(135deg, #a78bfa, #6c5ce7);
+            background: linear-gradient(135deg, #2ecc71, #1F6F50);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
         }
         .nav-links a {
-            color: #888;
+            color: #6b7b6b;
             text-decoration: none;
             margin-left: 32px;
             font-size: 14px;
             transition: color 0.3s;
         }
-        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover { color: #e0e0e0; }
         .buy-btn-nav {
-            background: linear-gradient(135deg, #6c5ce7, #a78bfa);
+            background: linear-gradient(135deg, #1F6F50, #2ecc71);
             color: #fff !important;
             padding: 10px 24px;
             border-radius: 12px;
@@ -73,12 +73,12 @@
         }
         .hero-badge {
             display: inline-block;
-            background: rgba(108, 92, 231, 0.15);
-            border: 1px solid rgba(108, 92, 231, 0.3);
+            background: rgba(31, 111, 80, 0.15);
+            border: 1px solid rgba(31, 111, 80, 0.35);
             padding: 6px 18px;
             border-radius: 100px;
             font-size: 13px;
-            color: #a78bfa;
+            color: #2ecc71;
             margin-bottom: 24px;
         }
         .hero h1 {
@@ -86,14 +86,14 @@
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 30%, #a78bfa);
+            background: linear-gradient(135deg, #fff 30%, #2ecc71);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .hero p {
             font-size: 18px;
-            color: #888;
-            max-width: 500px;
+            color: #6b7b6b;
+            max-width: 520px;
             margin: 0 auto 36px;
             line-height: 1.6;
         }
@@ -103,7 +103,7 @@
             justify-content: center;
         }
         .btn-primary {
-            background: linear-gradient(135deg, #6c5ce7, #a78bfa);
+            background: linear-gradient(135deg, #1F6F50, #2ecc71);
             color: #fff;
             padding: 14px 36px;
             border-radius: 14px;
@@ -111,18 +111,18 @@
             font-weight: 600;
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 4px 24px rgba(108, 92, 231, 0.3);
+            box-shadow: 0 4px 24px rgba(31, 111, 80, 0.35);
             border: none;
             cursor: pointer;
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(108, 92, 231, 0.5);
+            box-shadow: 0 8px 32px rgba(31, 111, 80, 0.55);
         }
         .btn-secondary {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
-            color: #ccc;
+            color: #aab8aa;
             padding: 14px 36px;
             border-radius: 14px;
             font-size: 16px;
@@ -130,7 +130,7 @@
             text-decoration: none;
             transition: background 0.3s;
         }
-        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.08); }
 
         /* PRICING */
         .pricing-section {
@@ -144,12 +144,11 @@
         }
         .section-sub {
             text-align: center;
-            color: #666;
+            color: #556b55;
             font-size: 16px;
             margin-bottom: 48px;
         }
 
-        /* TOGGLE */
         .toggle-wrap {
             display: flex;
             align-items: center;
@@ -159,39 +158,39 @@
         }
         .toggle-label {
             font-size: 15px;
-            color: #888;
+            color: #556b55;
             transition: color 0.3s;
             cursor: pointer;
         }
-        .toggle-label.active { color: #fff; font-weight: 600; }
+        .toggle-label.active { color: #e0e0e0; font-weight: 600; }
         .toggle {
             width: 52px;
             height: 28px;
-            background: rgba(108, 92, 231, 0.3);
+            background: rgba(31, 111, 80, 0.25);
             border-radius: 14px;
             cursor: pointer;
             position: relative;
             transition: background 0.3s;
-            border: 1px solid rgba(108, 92, 231, 0.4);
+            border: 1px solid rgba(31, 111, 80, 0.4);
         }
-        .toggle.on { background: #6c5ce7; }
+        .toggle.on { background: #1F6F50; }
         .toggle-knob {
             width: 22px;
             height: 22px;
-            background: #fff;
+            background: #e8f0e8;
             border-radius: 50%;
             position: absolute;
             top: 2px;
             left: 2px;
             transition: transform 0.3s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.4);
         }
         .toggle.on .toggle-knob { transform: translateX(24px); }
 
         .save-badge {
-            background: rgba(46, 213, 115, 0.15);
-            border: 1px solid rgba(46, 213, 115, 0.3);
-            color: #2ed573;
+            background: rgba(46, 204, 113, 0.12);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
             font-size: 12px;
             font-weight: 600;
             padding: 3px 10px;
@@ -199,7 +198,6 @@
             margin-left: 4px;
         }
 
-        /* CARDS */
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -208,8 +206,8 @@
             margin: 0 auto;
         }
         .price-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.07);
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: 24px;
             padding: 36px 28px;
             text-align: center;
@@ -217,19 +215,19 @@
             position: relative;
         }
         .price-card:hover {
-            border-color: rgba(108, 92, 231, 0.3);
+            border-color: rgba(31, 111, 80, 0.35);
             transform: translateY(-4px);
         }
         .price-card.popular {
-            border-color: rgba(108, 92, 231, 0.4);
-            background: rgba(108, 92, 231, 0.06);
+            border-color: rgba(31, 111, 80, 0.45);
+            background: rgba(31, 111, 80, 0.06);
         }
         .popular-badge {
             position: absolute;
             top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, #6c5ce7, #a78bfa);
+            background: linear-gradient(135deg, #1F6F50, #2ecc71);
             color: #fff;
             font-size: 11px;
             font-weight: 700;
@@ -240,7 +238,7 @@
         }
         .card-duration {
             font-size: 13px;
-            color: #888;
+            color: #556b55;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 16px;
@@ -248,14 +246,14 @@
         .card-price {
             font-size: 42px;
             font-weight: 800;
-            background: linear-gradient(135deg, #fff, #a78bfa);
+            background: linear-gradient(135deg, #e0e8e0, #2ecc71);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 4px;
         }
         .card-price-sub {
             font-size: 13px;
-            color: #555;
+            color: #445544;
             margin-bottom: 24px;
         }
         .card-features {
@@ -266,20 +264,20 @@
             list-style: none;
             padding: 5px 0;
             font-size: 13px;
-            color: #999;
+            color: #8a9a8a;
         }
         .card-features li::before {
             content: "✓";
-            color: #6c5ce7;
+            color: #2ecc71;
             font-weight: 700;
             margin-right: 8px;
         }
         .card-features li.disabled {
-            color: #444;
+            color: #333d33;
         }
         .card-features li.disabled::before {
             content: "—";
-            color: #333;
+            color: #2a332a;
         }
         .btn-card {
             display: inline-block;
@@ -295,21 +293,23 @@
             cursor: pointer;
         }
         .btn-card.primary {
-            background: linear-gradient(135deg, #6c5ce7, #a78bfa);
+            background: linear-gradient(135deg, #1F6F50, #2ecc71);
             color: #fff;
-            box-shadow: 0 4px 20px rgba(108, 92, 231, 0.3);
+            box-shadow: 0 4px 20px rgba(31, 111, 80, 0.35);
         }
         .btn-card.primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 28px rgba(108, 92, 231, 0.5);
+            box-shadow: 0 6px 28px rgba(31, 111, 80, 0.55);
         }
         .btn-card.outline {
             background: transparent;
-            border: 1px solid rgba(255,255,255,0.12);
-            color: #ccc;
+            border: 1px solid rgba(31, 111, 80, 0.25);
+            color: #8a9a8a;
         }
         .btn-card.outline:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(31, 111, 80, 0.08);
+            border-color: rgba(31, 111, 80, 0.4);
+            color: #c0d0c0;
         }
 
         /* FEATURES */
@@ -322,14 +322,14 @@
             gap: 20px;
         }
         .feature-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.05);
             border-radius: 20px;
             padding: 32px 28px;
             transition: border-color 0.3s, transform 0.3s;
         }
         .feature-card:hover {
-            border-color: rgba(108, 92, 231, 0.3);
+            border-color: rgba(31, 111, 80, 0.3);
             transform: translateY(-4px);
         }
         .feature-icon {
@@ -342,12 +342,12 @@
             font-size: 22px;
             margin-bottom: 18px;
         }
-        .fi-combat { background: rgba(255, 107, 107, 0.12); }
-        .fi-render { background: rgba(108, 92, 231, 0.12); }
-        .fi-player { background: rgba(0, 206, 201, 0.12); }
-        .fi-misc { background: rgba(253, 121, 168, 0.12); }
-        .fi-gui { background: rgba(255, 193, 7, 0.12); }
-        .fi-auth { background: rgba(46, 213, 115, 0.12); }
+        .fi-combat { background: rgba(231, 76, 60, 0.1); }
+        .fi-render { background: rgba(31, 111, 80, 0.12); }
+        .fi-player { background: rgba(46, 204, 113, 0.1); }
+        .fi-misc { background: rgba(241, 196, 15, 0.1); }
+        .fi-gui { background: rgba(155, 89, 182, 0.1); }
+        .fi-auth { background: rgba(52, 152, 219, 0.1); }
         .feature-card h3 {
             font-size: 18px;
             font-weight: 700;
@@ -355,7 +355,7 @@
         }
         .feature-card p {
             font-size: 14px;
-            color: #777;
+            color: #556b55;
             line-height: 1.6;
         }
 
@@ -369,15 +369,15 @@
             gap: 20px;
         }
         .screen-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.05);
             border-radius: 20px;
             overflow: hidden;
             aspect-ratio: 16/9;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #444;
+            color: #3a4d3a;
             font-size: 14px;
         }
         .screen-card img {
@@ -391,8 +391,8 @@
             padding: 80px 0;
         }
         .faq-item {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.05);
             border-radius: 16px;
             padding: 24px 28px;
             margin-bottom: 12px;
@@ -404,15 +404,15 @@
         }
         .faq-item p {
             font-size: 14px;
-            color: #777;
+            color: #556b55;
             line-height: 1.6;
         }
 
         footer {
             padding: 40px 0;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            color: #444;
+            border-top: 1px solid rgba(31, 111, 80, 0.1);
+            color: #3a4d3a;
             font-size: 13px;
         }
 
@@ -454,7 +454,6 @@
         </div>
     </section>
 
-    <!-- ====== PRICING ====== -->
     <section class="pricing-section" id="pricing">
         <h2 class="section-title">Тарифы</h2>
         <p class="section-sub">Выберите подходящий план</p>
@@ -468,7 +467,6 @@
             <span class="save-badge" id="saveBadge" style="display:none">-40%</span>
         </div>
 
-        <!-- TIME-BASED PLANS -->
         <div class="pricing-grid" id="timePlans">
             <div class="price-card">
                 <div class="card-duration">7 дней</div>
@@ -517,7 +515,6 @@
             </div>
         </div>
 
-        <!-- PERMANENT PLAN -->
         <div class="pricing-grid" id="permPlans" style="display:none; grid-template-columns: 1fr; max-width: 360px;">
             <div class="price-card popular">
                 <div class="popular-badge">Лучшая цена</div>
@@ -537,7 +534,6 @@
         </div>
     </section>
 
-    <!-- ====== FEATURES ====== -->
     <section class="features" id="features">
         <h2 class="section-title">Что внутри</h2>
         <p class="section-sub">60+ модулей, покрывающих все аспекты PvP</p>
@@ -575,7 +571,6 @@
         </div>
     </section>
 
-    <!-- ====== SCREENSHOTS ====== -->
     <section class="screenshots" id="screenshots">
         <h2 class="section-title">Скриншоты</h2>
         <p class="section-sub">Добавьте свои скриншоты</p>
@@ -587,7 +582,6 @@
         </div>
     </section>
 
-    <!-- ====== FAQ ====== -->
     <section class="faq" id="faq">
         <h2 class="section-title">FAQ</h2>
         <p class="section-sub">Частые вопросы</p>
@@ -623,11 +617,8 @@
 let currentMode = 'time';
 
 function togglePeriod() {
-    if (currentMode === 'time') {
-        setMode('perm');
-    } else {
-        setMode('time');
-    }
+    if (currentMode === 'time') setMode('perm');
+    else setMode('time');
 }
 
 function setMode(mode) {
