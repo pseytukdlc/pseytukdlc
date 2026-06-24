@@ -5,15 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PseytukDLC — Приватный Minecraft клиент</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #111111;
             color: #d0d4d0;
             overflow-x: hidden;
         }
 
+        /* ====== BG GLOWS ====== */
         .bg-glow {
             position: fixed;
             width: 600px;
@@ -23,10 +28,40 @@
             opacity: 0.12;
             pointer-events: none;
             z-index: 0;
+            animation: glowFloat 12s ease-in-out infinite;
         }
-        .bg-glow.g1 { top: -200px; left: -100px; background: #1F6F50; }
-        .bg-glow.g2 { top: 40%; right: -200px; background: #2ecc71; }
-        .bg-glow.g3 { bottom: -200px; left: 30%; background: #1a5c42; }
+        .bg-glow.g1 { top: -200px; left: -100px; background: #1F6F50; animation-delay: 0s; }
+        .bg-glow.g2 { top: 40%; right: -200px; background: #2ecc71; animation-delay: -4s; }
+        .bg-glow.g3 { bottom: -200px; left: 30%; background: #1a5c42; animation-delay: -8s; }
+        @keyframes glowFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 30px) scale(0.95); }
+        }
+
+        /* ====== PARTICLES ====== */
+        #particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #2ecc71;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFly linear infinite;
+        }
+        @keyframes particleFly {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+        }
 
         .container {
             max-width: 1100px;
@@ -36,11 +71,13 @@
             z-index: 1;
         }
 
+        /* ====== NAV ====== */
         nav {
             padding: 20px 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            animation: fadeDown 0.8s ease;
         }
         .logo {
             font-size: 22px;
@@ -49,15 +86,17 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
+            transition: transform 0.3s;
         }
+        .logo:hover { transform: scale(1.05); }
         .nav-links a {
             color: #6b7b6b;
             text-decoration: none;
             margin-left: 32px;
             font-size: 14px;
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.3s;
         }
-        .nav-links a:hover { color: #e0e0e0; }
+        .nav-links a:hover { color: #e0e0e0; transform: translateY(-1px); }
         .buy-btn-nav {
             background: linear-gradient(135deg, #1F6F50, #2ecc71);
             color: #fff !important;
@@ -65,8 +104,101 @@
             border-radius: 12px;
             font-weight: 600;
             -webkit-text-fill-color: #fff !important;
+            transition: box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 2px 12px rgba(31, 111, 80, 0.25);
+        }
+        .buy-btn-nav:hover {
+            box-shadow: 0 4px 20px rgba(31, 111, 80, 0.5);
+            transform: translateY(-2px);
         }
 
+        /* ====== ANIMATIONS ====== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(31, 111, 80, 0.4); }
+            50% { box-shadow: 0 0 0 12px rgba(31, 111, 80, 0); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        @keyframes slideNumber {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(46, 204, 113, 0.3)); }
+            50% { filter: drop-shadow(0 0 20px rgba(46, 204, 113, 0.6)); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.85);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ====== HERO ====== */
         .hero {
             text-align: center;
             padding: 100px 0 60px;
@@ -80,65 +212,110 @@
             font-size: 13px;
             color: #2ecc71;
             margin-bottom: 24px;
+            animation: fadeUp 0.6s ease, pulse 3s ease-in-out infinite 1s;
         }
         .hero h1 {
-            font-size: 56px;
-            font-weight: 800;
-            line-height: 1.1;
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.05;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #fff 30%, #2ecc71);
+            background: linear-gradient(135deg, #fff 20%, #2ecc71 60%, #1F6F50 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: fadeUp 0.8s ease 0.15s both;
+            background-size: 200% auto;
+            animation: fadeUp 0.8s ease 0.15s both, shimmer 6s linear infinite;
         }
         .hero p {
             font-size: 18px;
             color: #6b7b6b;
             max-width: 520px;
             margin: 0 auto 36px;
-            line-height: 1.6;
+            line-height: 1.7;
+            animation: fadeUp 0.8s ease 0.3s both;
         }
         .hero-buttons {
             display: flex;
             gap: 14px;
             justify-content: center;
+            animation: fadeUp 0.8s ease 0.45s both;
         }
         .btn-primary {
             background: linear-gradient(135deg, #1F6F50, #2ecc71);
             color: #fff;
-            padding: 14px 36px;
+            padding: 16px 40px;
             border-radius: 14px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 4px 24px rgba(31, 111, 80, 0.35);
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: left 0.6s;
+        }
+        .btn-primary:hover::after { left: 100%; }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(31, 111, 80, 0.55);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(31, 111, 80, 0.55);
         }
         .btn-secondary {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             color: #aab8aa;
-            padding: 14px 36px;
+            padding: 16px 40px;
             border-radius: 14px;
             font-size: 16px;
             font-weight: 500;
             text-decoration: none;
-            transition: background 0.3s;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s;
         }
-        .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(31, 111, 80, 0.3);
+            transform: translateY(-2px);
+        }
 
-        /* PRICING */
-        .pricing-section {
-            padding: 80px 0;
+        /* ====== STATS BAR ====== */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 40px 0;
+            margin-bottom: 20px;
         }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2ecc71, #1F6F50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #556b55;
+            margin-top: 4px;
+        }
+
+        /* ====== PRICING ====== */
+        .pricing-section { padding: 80px 0; }
         .section-title {
             text-align: center;
-            font-size: 36px;
+            font-size: 38px;
             font-weight: 800;
             margin-bottom: 12px;
         }
@@ -182,11 +359,10 @@
             position: absolute;
             top: 2px;
             left: 2px;
-            transition: transform 0.3s;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             box-shadow: 0 2px 6px rgba(0,0,0,0.4);
         }
         .toggle.on .toggle-knob { transform: translateX(24px); }
-
         .save-badge {
             background: rgba(46, 204, 113, 0.12);
             border: 1px solid rgba(46, 204, 113, 0.3);
@@ -196,6 +372,7 @@
             padding: 3px 10px;
             border-radius: 8px;
             margin-left: 4px;
+            animation: pulse 2s infinite;
         }
 
         .pricing-grid {
@@ -211,16 +388,31 @@
             border-radius: 24px;
             padding: 36px 28px;
             text-align: center;
-            transition: border-color 0.3s, transform 0.3s;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
+            overflow: hidden;
         }
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(31, 111, 80, 0.05), transparent);
+            transition: left 0.6s;
+        }
+        .price-card:hover::before { left: 100%; }
         .price-card:hover {
             border-color: rgba(31, 111, 80, 0.35);
-            transform: translateY(-4px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
         }
         .price-card.popular {
             border-color: rgba(31, 111, 80, 0.45);
             background: rgba(31, 111, 80, 0.06);
+        }
+        .price-card.popular:hover {
+            border-color: rgba(46, 204, 113, 0.6);
+            box-shadow: 0 12px 40px rgba(31, 111, 80, 0.2);
         }
         .popular-badge {
             position: absolute;
@@ -235,6 +427,7 @@
             border-radius: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            animation: glowPulse 2s infinite;
         }
         .card-duration {
             font-size: 13px;
@@ -244,13 +437,15 @@
             margin-bottom: 16px;
         }
         .card-price {
-            font-size: 42px;
+            font-size: 44px;
             font-weight: 800;
             background: linear-gradient(135deg, #e0e8e0, #2ecc71);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 4px;
+            transition: transform 0.3s;
         }
+        .price-card:hover .card-price { transform: scale(1.05); }
         .card-price-sub {
             font-size: 13px;
             color: #445544;
@@ -265,20 +460,20 @@
             padding: 5px 0;
             font-size: 13px;
             color: #8a9a8a;
+            transition: transform 0.3s;
         }
+        .card-features li:hover { transform: translateX(4px); }
         .card-features li::before {
             content: "✓";
             color: #2ecc71;
             font-weight: 700;
             margin-right: 8px;
+            display: inline-block;
+            transition: transform 0.3s;
         }
-        .card-features li.disabled {
-            color: #333d33;
-        }
-        .card-features li.disabled::before {
-            content: "—";
-            color: #2a332a;
-        }
+        .card-features li:hover::before { transform: scale(1.2); }
+        .card-features li.disabled { color: #333d33; }
+        .card-features li.disabled::before { content: "—"; color: #2a332a; }
         .btn-card {
             display: inline-block;
             width: 100%;
@@ -288,18 +483,30 @@
             font-weight: 600;
             text-decoration: none;
             text-align: center;
-            transition: transform 0.2s, box-shadow 0.3s;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
+        .btn-card::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -60%;
+            width: 200%; height: 200%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.08), transparent);
+            transform: rotate(45deg);
+            transition: left 0.5s;
+        }
+        .btn-card:hover::after { left: 100%; }
         .btn-card.primary {
             background: linear-gradient(135deg, #1F6F50, #2ecc71);
             color: #fff;
             box-shadow: 0 4px 20px rgba(31, 111, 80, 0.35);
         }
         .btn-card.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 28px rgba(31, 111, 80, 0.55);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(31, 111, 80, 0.55);
         }
         .btn-card.outline {
             background: transparent;
@@ -310,12 +517,11 @@
             background: rgba(31, 111, 80, 0.08);
             border-color: rgba(31, 111, 80, 0.4);
             color: #c0d0c0;
+            transform: translateY(-2px);
         }
 
-        /* FEATURES */
-        .features {
-            padding: 80px 0;
-        }
+        /* ====== FEATURES ====== */
+        .features { padding: 80px 0; }
         .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -326,22 +532,37 @@
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 20px;
             padding: 32px 28px;
-            transition: border-color 0.3s, transform 0.3s;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
         }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, transparent, #2ecc71, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .feature-card:hover::before { opacity: 1; }
         .feature-card:hover {
             border-color: rgba(31, 111, 80, 0.3);
-            transform: translateY(-4px);
+            transform: translateY(-6px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
         }
         .feature-icon {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 18px;
+            transition: transform 0.3s;
         }
+        .feature-card:hover .feature-icon { transform: scale(1.1) rotate(-5deg); }
         .fi-combat { background: rgba(231, 76, 60, 0.1); }
         .fi-render { background: rgba(31, 111, 80, 0.12); }
         .fi-player { background: rgba(46, 204, 113, 0.1); }
@@ -359,10 +580,43 @@
             line-height: 1.6;
         }
 
-        /* SCREENSHOTS */
-        .screenshots {
-            padding: 80px 0;
+        /* ====== BANNER ====== */
+        .banner {
+            padding: 60px 0;
         }
+        .banner-inner {
+            background: linear-gradient(135deg, rgba(31, 111, 80, 0.15), rgba(46, 204, 113, 0.08));
+            border: 1px solid rgba(31, 111, 80, 0.2);
+            border-radius: 24px;
+            padding: 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .banner-inner::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(31, 111, 80, 0.08) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        .banner h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        .banner p {
+            color: #6b7b6b;
+            font-size: 16px;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .banner .btn-primary { position: relative; }
+
+        /* ====== SCREENSHOTS ====== */
+        .screenshots { padding: 80px 0; }
         .screen-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -379,33 +633,71 @@
             justify-content: center;
             color: #3a4d3a;
             font-size: 14px;
+            transition: all 0.4s;
+            position: relative;
         }
-        .screen-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .screen-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, rgba(31,111,80,0.3), transparent) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
+        .screen-card:hover::after { opacity: 1; }
+        .screen-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        .screen-card img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* FAQ */
-        .faq {
-            padding: 80px 0;
-        }
+        /* ====== FAQ ====== */
+        .faq { padding: 80px 0; }
         .faq-item {
             background: rgba(255,255,255,0.025);
             border: 1px solid rgba(255,255,255,0.05);
             border-radius: 16px;
             padding: 24px 28px;
             margin-bottom: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .faq-item:hover {
+            border-color: rgba(31, 111, 80, 0.25);
+            background: rgba(255,255,255,0.035);
         }
         .faq-item h4 {
             font-size: 16px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 0;
+            transition: color 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        .faq-item h4::after {
+            content: '+';
+            font-size: 20px;
+            color: #2ecc71;
+            transition: transform 0.3s;
+        }
+        .faq-item.open h4::after { transform: rotate(45deg); }
         .faq-item p {
             font-size: 14px;
             color: #556b55;
             line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin 0.4s ease, opacity 0.3s;
+            opacity: 0;
+        }
+        .faq-item.open p {
+            max-height: 200px;
+            margin-top: 12px;
+            opacity: 1;
         }
 
         footer {
@@ -422,11 +714,14 @@
             .pricing-grid { grid-template-columns: 1fr; max-width: 360px; }
             .screen-grid { grid-template-columns: 1fr; }
             .hero-buttons { flex-direction: column; align-items: center; }
+            .stats-bar { gap: 30px; }
+            .stat-number { font-size: 28px; }
         }
     </style>
 </head>
 <body>
 
+<div id="particles"></div>
 <div class="bg-glow g1"></div>
 <div class="bg-glow g2"></div>
 <div class="bg-glow g3"></div>
@@ -454,11 +749,30 @@
         </div>
     </section>
 
-    <section class="pricing-section" id="pricing">
-        <h2 class="section-title">Тарифы</h2>
-        <p class="section-sub">Выберите подходящий план</p>
+    <div class="stats-bar reveal">
+        <div class="stat-item">
+            <div class="stat-number" data-target="60">0</div>
+            <div class="stat-label">Модулей</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="12">0</div>
+            <div class="stat-label">Категорий</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="24">0</div>
+            <div class="stat-label">/7 Поддержка</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number" data-target="100">0</div>
+            <div class="stat-label">% Приватный</div>
+        </div>
+    </div>
 
-        <div class="toggle-wrap">
+    <section class="pricing-section" id="pricing">
+        <h2 class="section-title reveal">Тарифы</h2>
+        <p class="section-sub reveal">Выберите подходящий план</p>
+
+        <div class="toggle-wrap reveal">
             <span class="toggle-label active" id="label-time" onclick="setMode('time')">На время</span>
             <div class="toggle" id="periodToggle" onclick="togglePeriod()">
                 <div class="toggle-knob"></div>
@@ -468,7 +782,7 @@
         </div>
 
         <div class="pricing-grid" id="timePlans">
-            <div class="price-card">
+            <div class="price-card reveal" style="transition-delay: 0.1s">
                 <div class="card-duration">7 дней</div>
                 <div class="card-price">490 ₽</div>
                 <div class="card-price-sub">≈ 70 ₽/день</div>
@@ -483,7 +797,7 @@
                 <button class="btn-card outline" onclick="buyKey('7d')">Купить на 7 дней</button>
             </div>
 
-            <div class="price-card popular">
+            <div class="price-card popular reveal" style="transition-delay: 0.2s">
                 <div class="popular-badge">Популярный</div>
                 <div class="card-duration">30 дней</div>
                 <div class="card-price">990 ₽</div>
@@ -499,7 +813,7 @@
                 <button class="btn-card primary" onclick="buyKey('30d')">Купить на 30 дней</button>
             </div>
 
-            <div class="price-card">
+            <div class="price-card reveal" style="transition-delay: 0.3s">
                 <div class="card-duration">90 дней</div>
                 <div class="card-price">1 990 ₽</div>
                 <div class="card-price-sub">≈ 22 ₽/день</div>
@@ -534,36 +848,44 @@
         </div>
     </section>
 
+    <div class="banner reveal-scale">
+        <div class="banner-inner">
+            <h2>Ограниченное предложение</h2>
+            <p>Первые 50 покупателей получают скидку 20% на любой тариф</p>
+            <a href="#pricing" class="btn-primary">Забрать скидку</a>
+        </div>
+    </div>
+
     <section class="features" id="features">
-        <h2 class="section-title">Что внутри</h2>
-        <p class="section-sub">60+ модулей, покрывающих все аспекты PvP</p>
+        <h2 class="section-title reveal">Что внутри</h2>
+        <p class="section-sub reveal">60+ модулей, покрывающих все аспекты PvP</p>
         <div class="features-grid">
-            <div class="feature-card">
+            <div class="feature-card reveal" style="transition-delay: 0.05s">
                 <div class="feature-icon fi-combat">⚔</div>
                 <h3>Combat</h3>
                 <p>AutoAimBow с баллистикой, Aura, AutoTotem, AutoGApple, AutoShield, Reach, Velocity.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal" style="transition-delay: 0.1s">
                 <div class="feature-icon fi-render">👁</div>
                 <h3>Render</h3>
                 <p>ESP, Tracer, ItemESP, NameTags, StorageESP, BlockESP, FullBright, анимированный HUD.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal" style="transition-delay: 0.15s">
                 <div class="feature-icon fi-player">🏃</div>
                 <h3>Player</h3>
                 <p>AppleFarm, AutoWardenChest, Scaffold, ChestStealer, FastBreak, AutoFish.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal" style="transition-delay: 0.2s">
                 <div class="feature-icon fi-gui">✨</div>
                 <h3>Liquid Glass GUI</h3>
                 <p>Уникальный интерфейс в стиле iOS 26 — полупрозрачные панели с размытием.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal" style="transition-delay: 0.25s">
                 <div class="feature-icon fi-misc">🔧</div>
                 <h3>Misc</h3>
                 <p>AutoBuy, Waypoints, Macros, IRC-чат, уведомления, конфиги.</p>
             </div>
-            <div class="feature-card">
+            <div class="feature-card reveal" style="transition-delay: 0.3s">
                 <div class="feature-icon fi-auth">🔒</div>
                 <h3>Приватность</h3>
                 <p>HWID-привязка, приватная аутентификация, обфускация URL.</p>
@@ -572,36 +894,36 @@
     </section>
 
     <section class="screenshots" id="screenshots">
-        <h2 class="section-title">Скриншоты</h2>
-        <p class="section-sub">Добавьте свои скриншоты</p>
+        <h2 class="section-title reveal">Скриншоты</h2>
+        <p class="section-sub reveal">Добавьте свои скриншоты</p>
         <div class="screen-grid">
-            <div class="screen-card">Скриншот ClickGUI</div>
-            <div class="screen-card">Скриншот HUD</div>
-            <div class="screen-card">Скриншот Главное меню</div>
-            <div class="screen-card">Скриншот Модули</div>
+            <div class="screen-card reveal-left" style="transition-delay: 0.1s">Скриншот ClickGUI</div>
+            <div class="screen-card reveal-right" style="transition-delay: 0.2s">Скриншот HUD</div>
+            <div class="screen-card reveal-left" style="transition-delay: 0.3s">Скриншот Главное меню</div>
+            <div class="screen-card reveal-right" style="transition-delay: 0.4s">Скриншот Модули</div>
         </div>
     </section>
 
     <section class="faq" id="faq">
-        <h2 class="section-title">FAQ</h2>
-        <p class="section-sub">Частые вопросы</p>
-        <div class="faq-item">
+        <h2 class="section-title reveal">FAQ</h2>
+        <p class="section-sub reveal">Частые вопросы</p>
+        <div class="faq-item reveal" onclick="toggleFaq(this)" style="transition-delay: 0.05s">
             <h4>Как купить ключ?</h4>
             <p>Выбираете тариф, оплачиваете на Funpay или через ЮMoney/Тинькофф, получаете ключ в ЛС. Скачиваете клиент, вводите ключ при запуске.</p>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal" onclick="toggleFaq(this)" style="transition-delay: 0.1s">
             <h4>Что значит "на время"?</h4>
             <p>Ключ работает определённый срок (7, 30 или 90 дней). После окончания — ключ деактивируется. Можно продлить или купить навсегда.</p>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal" onclick="toggleFaq(this)" style="transition-delay: 0.15s">
             <h4>Можно ли продлить ключ?</h4>
             <p>Да. Пишите в ЛС — продлим со скидкой. Или просто купите новый ключ.</p>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal" onclick="toggleFaq(this)" style="transition-delay: 0.2s">
             <h4>На сколько ПК работает ключ?</h4>
             <p>Один ключ привязывается к одному ПК (HWID). При смене железа — пишите в ЛС.</p>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal" onclick="toggleFaq(this)" style="transition-delay: 0.25s">
             <h4>Банят ли за клиент?</h4>
             <p>Клиент проходит базовые античиты. 100% гарантию от бана дать невозможно.</p>
         </div>
@@ -614,6 +936,59 @@
 </div>
 
 <script>
+// ====== PARTICLES ======
+(function() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = (8 + Math.random() * 12) + 's';
+        p.style.animationDelay = Math.random() * 10 + 's';
+        p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+        container.appendChild(p);
+    }
+})();
+
+// ====== SCROLL REVEAL ======
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+    observer.observe(el);
+});
+
+// ====== COUNTER ANIMATION ======
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.dataset.target);
+            let current = 0;
+            const step = Math.max(1, Math.floor(target / 40));
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = current + (target >= 100 ? '%' : '+');
+            }, 30);
+            counterObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-number').forEach(el => {
+    counterObserver.observe(el);
+});
+
+// ====== PRICING TOGGLE ======
 let currentMode = 'time';
 
 function togglePeriod() {
@@ -630,23 +1005,54 @@ function setMode(mode) {
     const labelPerm = document.getElementById('label-perm');
     const saveBadge = document.getElementById('saveBadge');
 
+    timePlans.style.transition = 'opacity 0.3s, transform 0.3s';
+    permPlans.style.transition = 'opacity 0.3s, transform 0.3s';
+
     if (mode === 'perm') {
         toggle.classList.add('on');
-        timePlans.style.display = 'none';
-        permPlans.style.display = 'grid';
+        timePlans.style.opacity = '0';
+        timePlans.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            timePlans.style.display = 'none';
+            permPlans.style.display = 'grid';
+            permPlans.style.opacity = '0';
+            permPlans.style.transform = 'translateY(20px)';
+            requestAnimationFrame(() => {
+                permPlans.style.opacity = '1';
+                permPlans.style.transform = 'translateY(0)';
+            });
+        }, 300);
         labelTime.classList.remove('active');
         labelPerm.classList.add('active');
         saveBadge.style.display = 'inline';
     } else {
         toggle.classList.remove('on');
-        timePlans.style.display = 'grid';
-        permPlans.style.display = 'none';
+        permPlans.style.opacity = '0';
+        permPlans.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            permPlans.style.display = 'none';
+            timePlans.style.display = 'grid';
+            timePlans.style.opacity = '0';
+            timePlans.style.transform = 'translateY(20px)';
+            requestAnimationFrame(() => {
+                timePlans.style.opacity = '1';
+                timePlans.style.transform = 'translateY(0)';
+            });
+        }, 300);
         labelTime.classList.add('active');
         labelPerm.classList.remove('active');
         saveBadge.style.display = 'none';
     }
 }
 
+// ====== FAQ ACCORDION ======
+function toggleFaq(item) {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+}
+
+// ====== BUY ======
 function buyKey(plan) {
     const urls = {
         '7d': 'https://funpay.com/lots/BUY_ITEM_ID/',
@@ -656,6 +1062,23 @@ function buyKey(plan) {
     };
     window.open(urls[plan] || 'https://funpay.com', '_blank');
 }
+
+// ====== SMOOTH NAV HIDE ON SCROLL ======
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    const scroll = window.scrollY;
+    if (scroll > 100) {
+        nav.style.background = 'rgba(17, 17, 17, 0.9)';
+        nav.style.backdropFilter = 'blur(20px)';
+        nav.style.borderBottom = '1px solid rgba(31, 111, 80, 0.1)';
+    } else {
+        nav.style.background = 'transparent';
+        nav.style.backdropFilter = 'none';
+        nav.style.borderBottom = 'none';
+    }
+    lastScroll = scroll;
+});
 </script>
 
 </body>
